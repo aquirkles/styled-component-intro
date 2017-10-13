@@ -1,8 +1,7 @@
 
 import React from 'react';
 import { configure, addDecorator } from '@storybook/react';
-import { ThemeProvider, injectGlobal } from 'styled-components'
-import theme from '../src/foundation/defaultTheme';
+import { css } from 'glamor'
 
 const fontUrlPrefix = 'https://cdn.telus.digital/thorium/core/fonts';
 const HelveticaNeueThin35 = `${fontUrlPrefix}/aff68211-86bb-476d-882e-f7a3face144c.woff2`;
@@ -12,7 +11,7 @@ const HelveticaNeueThin65 = `${fontUrlPrefix}/etext/3e8a8b56-3cb0-4347-b670-eaaf
 const iconFontUrlPrefix = 'https://cdn.telus.digital/thorium/core/v0.4.0/';
 const TelusUtilFontIcon = `${iconFontUrlPrefix}core-icons.woff2`;
 
-injectGlobal`
+css.insert(`
   * {
     box-sizing: border-box;
   }
@@ -46,14 +45,10 @@ injectGlobal`
     font-weight: normal;
     font-style: normal;
   }
-`;
+`);
 
 
-addDecorator(story => (
-  <ThemeProvider theme={theme}>
-      {story()}
-  </ThemeProvider>
-));
+addDecorator(story => story());
 
 function loadStories() {
   require('../stories');

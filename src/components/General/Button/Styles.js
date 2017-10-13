@@ -1,78 +1,79 @@
-import styled from 'styled-components';
-import { prop, ifProp, switchProp } from 'styled-tools'
-import media from '../../../foundation/mediaQueries';
+import { media, merge } from 'glamor'
+import breakpoints from '../../../foundation/mediaQueries';
+import theme from '../../../foundation/defaultTheme';
 
-const Button = styled.button`
-  display: block;
-  width: 100%;
-  padding: ${prop('theme.spaces.base')} ${prop('theme.spaces.wide')};
-  transition: background 0.2s;
-  font-family: ${prop('theme.fonts.telus')};
-  text-align: center;
-  cursor: pointer;
-  font-size: 1rem;
-  letter-spacing: -0.8px;
-  line-height: 1.5;
-  font-weight: ${prop('theme.fontWeights.medium')};
-  border-width: 0;
-  border-radius: 4px;
-  
-  :hover {
-    box-shadow: 0 0 0 1px;
-  }
+const buttonStyles = {
+    'display': `block`,
+    'width': `100%`,
+    'padding': `${theme.spaces.base} ${theme.spaces.wide}`,
+    'transition': `background 0.2s`,
+    'fontFamily': `${theme.fonts.telus}`,
+    'textAlign': `center`,
+    'cursor': `pointer`,
+    'fontSize': `1rem`,
+    'letterSpacing': `-0.8px`,
+    'lineHeight': `1.5`,
+    'fontWeight': `${theme.fontWeights.medium}`,
+    'borderWidth': `0`,
+    'borderRadius': `4px`,
+    ':hover': {
+        'boxShadow': `0 0 0 1px`,
+    },
+};
 
-  ${media.greaterThan('sm')`
-    width: auto;
-    display: inline-block;
-    + button {
-      margin-left: 16px;
+const button = merge(buttonStyles,
+    media(`(min-width: ${breakpoints.sm})`, {
+        'width': `auto`,
+        'display': `inlineBlock`,
+        '+ button': {
+            'marginLeft': `16px`,
+        }
+    })
+);
+
+export const PrimaryButton = merge(button, {
+    'backgroundColor': `${theme.colors.primary}`,
+    'color': `${theme.colors.white}`,
+    ':hover': {
+        'backgroundColor': `${theme.colors.white}`,
+        'color': `${theme.colors.primary}`,
     }
-  `}
-`;
+});
 
-export const PrimaryButton = Button.extend`
-  background-color: ${prop('theme.colors.primary')};
-  color: ${prop('theme.colors.white')};
-  :hover {
-    background-color: ${prop('theme.colors.white')};
-    color: ${prop('theme.colors.primary')};
+export const SecondaryButton = merge(button, {
+  'backgroundColor': `${theme.colors.secondary}`,
+  'color': `${theme.colors.white}`,
+  ':hover': {
+      'backgroundColor': `${theme.colors.white}`,
+      'color': `${theme.colors.secondary}`,
   }
-`;
+});
 
-export const SecondaryButton = Button.extend`
-  background-color: ${prop('theme.colors.secondary')};
-  color: ${prop('theme.colors.white')};
-  :hover {
-    background-color: ${prop('theme.colors.white')};
-    color: ${prop('theme.colors.secondary')};
+export const DisabledButton = merge(button, {
+  'backgroundColor': `${theme.colors.athensGrey}`,
+  'color': `${theme.colors.disabled}`,
+  'cursor': `not-allowed`,
+  ':hover': {
+    'boxShadow': `none`,
   }
-`;
+});
 
-export const DisabledButton = Button.extend`
-  background-color: ${prop('theme.colors.athensGrey')};
-  color: ${prop('theme.colors.disabled')};
-  cursor: not-allowed;
-  :hover {
-    box-shadow: none;
+export const DangerButton = merge(button, {
+  'backgroundColor': `${theme.colors.danger}`,
+  'color': `${theme.colors.white}`,
+  ':hover': {
+    'backgroundColor': `${theme.colors.white}`,
+    'color': `${theme.colors.danger}`,
   }
-`;
+});
 
-export const DangerButton = Button.extend`
-  background-color: ${prop('theme.colors.danger')};
-  color: ${prop('theme.colors.white')};
-  :hover {
-    background-color: ${prop('theme.colors.white')};
-    color: ${prop('theme.colors.danger')};
-  }
-`;
+export const InvertedButton = merge(button, {
+  'backgroundColor': `${theme.colors.white}`,
+  'color': `${theme.colors.shark}`,
 
-export const InvertedButton = Button.extend`
-  background-color: ${prop('theme.colors.white')};
-  color: ${prop('theme.colors.shark')};
-  
-  :hover {
-    box-shadow: 0 0 0 1px;
-    background-color: transparent;
-    color: ${prop('theme.colors.white')};
+  ':hover': {
+    'boxShadow': `0 0 0 1px`,
+    'backgroundColor': `transparent`,
+    'color': `${theme.colors.white}`,
   }
-`;
+});

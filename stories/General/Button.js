@@ -7,7 +7,7 @@ import Button from '../../src/components/General/Button';
 const BasicButton = withInfo('Buttons')(() => {
   const style={
     padding: '10px'
-  }
+  };
   return (
     <div style={{width: '100%'}}>
       <div style={style}>
@@ -27,8 +27,7 @@ const BasicButton = withInfo('Buttons')(() => {
       </div>
     </div>
   )
-  }
-);
+});
 
 
 const ButtonStory = storiesOf('General/Button', module)

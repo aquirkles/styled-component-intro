@@ -1,4 +1,5 @@
 import React from 'react';
+import { css } from 'glamor'
 import { oneOf } from 'prop-types';
 import {
   PrimaryButton,
@@ -21,9 +22,9 @@ const Button = ({ variant, disabled, children, ...rest }) => {
       default: return PrimaryButton;
     }
   };
-  const Btn = getBtnType(variant, disabled);
+  const buttonStyles = getBtnType(variant, disabled);
   return (
-    <Btn {...rest} disabled={disabled}>{children}</Btn>
+    <button {...rest} {...css(buttonStyles)} disabled={disabled}>{children}</button>
   );
 };
 
@@ -31,7 +32,12 @@ Button.propTypes = {
   /**
    * available variants: primary, secondary, inverted, danger
    */
-  variant: oneOf(['primary', 'secondary', 'inverted', 'danger'])
+  variant: oneOf([
+      'primary',
+      'secondary',
+      'inverted',
+      'danger'
+  ])
 };
 
 Button.defaultProps = {
